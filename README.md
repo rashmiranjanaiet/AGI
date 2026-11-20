@@ -1,29 +1,28 @@
 # AGI Research Review (2026)
 
-An independent 100-page literature synthesis by **Rashmi Ranjan Behera**, prepared for **Dr. Vidya Mohanty** as the intended academic reader. The document does not claim co-authorship, supervision, endorsement, or a year of work.
+An independent 50-page literature synthesis by **Rashmi Ranjan Behera**, prepared for academic discussion with **Dr. Vidya Mohanty**. The attribution identifies the intended reader; it does not claim co-authorship, supervision, or endorsement.
 
-The review synthesizes 20 recent papers on AGI measurement, multimodal and visual intelligence, agent architectures, training and environment scaling, benchmark design, and process reliability. It includes original conceptual diagrams, two-page profiles of each source, a proposed evaluation protocol, and an annotated source register.
+The review synthesizes the 20 supplied papers on AGI measurement, multimodal and visual intelligence, agent architectures, training and environment scaling, benchmark design, and process reliability. It includes a paper-by-paper critical review, a proposed evaluation protocol, technical appendices, and linked references.
 
 ## Downloads
 
-- [100-page PDF report](site/downloads/AGI_Research_Review_2026.pdf)
-- [Editable Word manuscript](site/downloads/AGI_Research_Review_2026.docx)
-- [21-slide PowerPoint deck](site/downloads/AGI_Research_Review_2026.pptx)
+- [50-page two-column PDF review](site/downloads/AGI_Research_Review_2026.pdf)
+- [21-slide companion presentation](site/downloads/AGI_Research_Review_2026.pptx)
 - [Annotated sources and publication status](site/sources.html)
-- Hosted review website: https://rashmiranjanaiet.github.io/AGI/
+- Hosted review: <https://rashmiranjanaiet.github.io/AGI/>
 
-The twenty source PDFs remain in the author’s local workspace. This repository links to official source records and does not redistribute papers whose licenses may restrict copying.
+## Figures and source use
 
-## Provenance and scope
+Figures 1 from ACL Anthology papers [R10]–[R20] are reproduced with their source captions and attribution under the applicable Creative Commons Attribution 4.0 policy. Other source diagrams are redrawn as reviewer schematics. Source prose is summarized in original wording, with citations and links to the official records; the source PDFs are not redistributed here. The ACL policy excludes third-party material from its blanket reuse permission, so such content is not included.
 
-The review is a focused, non-systematic literature synthesis, not a peer-reviewed publication. It distinguishes conference publications, lab reports, surveys, position papers, and preprints. The source index records publisher and author links. The report does not claim that any paper in the corpus demonstrates AGI. Its diagrams are conceptual schematics created for this review, not copied figures or empirical results.
+## Scope and provenance
 
-“Prepared for Dr. Vidya Mohanty” identifies the intended reader only. It does not imply that Dr. Mohanty co-authored, supervised, or endorsed the work.
+This is a focused, non-systematic literature synthesis, not a peer-reviewed publication. It distinguishes conference papers, reports, position papers, surveys, and preprints. The review does not claim that any paper in the corpus demonstrates AGI. Publication details and versions should be checked against the official records before formal citation.
 
-## Rebuilding
+## Rebuilding the PDF
 
-The generation scripts create the PDF, DOCX, and PPTX from the review content. Use Python with ReportLab, python-docx, and python-pptx installed:
+The report generator is `build_academic_review.py`. It requires Python, ReportLab, Poppler (`pdftotext`, `pdftoppm`), and the source PDFs in `papers/`. Run:
 
-    python build_resource.py
+    python3 build_academic_review.py
 
-Generated files in output/ can be copied into site/downloads/ for the static website.
+Copy `output/AGI_Research_Review_2026.pdf` to `site/downloads/` to update the hosted PDF.
