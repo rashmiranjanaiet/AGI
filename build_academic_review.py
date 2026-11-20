@@ -1080,9 +1080,10 @@ FIGURE_REGISTER = [
 
 
 ABSTRACT = (
-    "Artificial general intelligence is discussed as a milestone, but current research "
-    "often measures separate capabilities through different tasks, agents, and evaluators. "
-    "This review synthesizes twenty supplied research papers and technical reports dated "
+    "An agent can complete a familiar task and still struggle when the interface changes "
+    "or when an early mistake affects later decisions. This paper proposes a framework "
+    "for evaluating how broadly an agent’s capabilities transfer and how reliably it "
+    "acts over time. It draws on twenty research papers and technical reports dated "
     "between November 2025 and November 2026. The corpus covers cognitive capability profiles, "
     "visual grounding, agent architectures, persistent state, training and environment synthesis, "
     "benchmark design, process evaluation, data curation, and enterprise workflows. Across these "
@@ -1370,12 +1371,12 @@ def build_document():
     ])
     st = make_styles()
     story = []
-    story.append(Paragraph("GENERAL INTELLIGENCE AS A RESEARCH PROGRAM", st["title"]))
-    story.append(Paragraph("A critical synthesis of twenty recent papers on capability, agents, environments, and evaluation", st["affiliation"]))
+    story.append(Paragraph("General Intelligence as a Research Program", st["title"]))
+    story.append(Paragraph("A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents", st["affiliation"]))
     story.append(Spacer(1, 3))
     story.append(Paragraph("Rashmi Ranjan Behera", st["byline"]))
-    story.append(Paragraph("Independent literature synthesis · Prepared for academic discussion with Dr. Vidya Mohanty", st["affiliation"]))
-    story.append(Paragraph("20 November 2026 · Version 1", st["affiliation"]))
+    story.append(Paragraph("Prepared for discussion with Dr. Vidya Mohanty", st["affiliation"]))
+    story.append(Paragraph("20 November 2026", st["affiliation"]))
     story.append(Spacer(1, 7))
     left = [
         Paragraph("Abstract", ParagraphStyle("AbsHead", fontName="TNR-Bold", fontSize=11.1, leading=13, alignment=TA_CENTER, spaceAfter=6)),
@@ -1385,7 +1386,6 @@ def build_document():
     intro = [
         Paragraph("1 Introduction", ParagraphStyle("IntroHead", fontName="TNR-Bold", fontSize=11.1, leading=13, alignment=TA_CENTER, spaceAfter=6)),
         Paragraph(clean_text(FIRST_PAGE_INTRO), st["firstbody"]),
-        Paragraph(clean_text("This document is an independent synthesis. “Prepared for” identifies the intended reader and does not imply co-authorship, supervision, or endorsement."), st["meta"]),
     ]
     cover_table = Table([[left, intro]], colWidths=[col_w, col_w], hAlign="LEFT")
     cover_table.setStyle(TableStyle([
@@ -1396,8 +1396,6 @@ def build_document():
         ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
     ]))
     story.append(cover_table)
-    story.append(Spacer(1, 4))
-    story.append(Paragraph("RESEARCH RESOURCE PAPER · TWO-COLUMN REVIEW · 20 SOURCE PAPERS", st["meta"]))
     story.append(NextPageTemplate("Body"))
     story.append(PageBreak())
 
