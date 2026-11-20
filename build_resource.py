@@ -526,7 +526,7 @@ add_text(s,'Independent synthesis; no co-authorship or endorsement is implied.',
 slide_data=[
 ('The question behind “AGI”',['Define tasks, environments, horizons, and constraints.','Treat generality as a testable research program.','This corpus does not demonstrate achieved AGI.'],['Breadth','Transfer','Adaptation','Reliability','Evidence'],'[R01–R05]'),
 ('A capability profile',['Averages conceal weak dimensions.','Publish component scores and uncertainty.','Human comparisons need explicit task and population choices.'],['Perception','Learning','Memory','Reasoning','Planning'],'[R01,R04]'),
-('Why capability looks jagged',['Strong performance can coexist with simple failures.','Use profiles, tail outcomes, and task-level diagnostics.','Treat a summary index as a supplement.'],None,'[R04]'),
+('Why capability looks jagged',['Strong performance can coexist with simple failures.','Use profiles, tail outcomes, and task-level diagnostics.','Treat a summary index as a supplement.'],['Tasks','Scores','Spread','Weakness','Report'],'[R04]'),
 ('Visual intelligence',['Perception supports prediction and action.','Active sensing is part of agent behavior.','Ground claims in the source actually inspected.'],['Observe','Attend','Model','Predict','Act'],'[R03,R14]'),
 ('An agent is a system',['Model, scaffold, memory, tools, and environment jointly shape outcomes.','Compare systems under matched budgets.','Show the complete execution trace.'],['Observe','Represent','Plan','Use tool','Verify'],'[R05,R11,R16]'),
 ('Persistent state',['Long context and durable state solve different problems.','External files help long runs but can preserve errors.','Validate provenance and state transitions.'],['Task','Working state','Artifact','Audit','Resume'],'[R11,R16]'),
@@ -534,16 +534,16 @@ slide_data=[
 ('Environment scaling',['Diversity should be measured by task structure, not count alone.','Simulations aid control; live tools add friction.','Hold out domains and interfaces.'],['Schemas','Domains','Tasks','Trajectories','Transfer'],'[R06,R10]'),
 ('Agent evaluation map',['Specify data, environment, interface, metric, and safety.','Combine component and end-to-end tests.','Keep model and scaffold versions visible.'],['Data','Environment','Interface','Metric','Safety'],'[R05,R12]'),
 ('Process matters',['Correct answers can arise from unsafe or unsupported actions.','Score traces against explicit constraints.','Contain write actions and report permissions.'],['Intent','Evidence','Action','Check','Outcome'],'[R14,R16,R19]'),
-('Reliability and uncertainty',['Repeat independent runs.','Report variance, recovery, and failure severity.','One successful trajectory is weak evidence.'],None,'[R04,R05,R09]'),
+('Reliability and uncertainty',['Repeat independent runs.','Report variance, recovery, and failure severity.','One successful trajectory is weak evidence.'],['Run 1','Run 2','Run 3','Variance','Review'],'[R04,R05,R09]'),
 ('Specialists and coordination',['Roles may help divide work.','Measure communication overhead and interference.','Test integration on held-out task combinations.'],['Specialist A','Coordinator','Specialist B','Shared state','Audit'],'[R15,R17]'),
 ('Domain agents',['Data agents combine schema understanding, querying, and explanation.','Retain executable traces.','Fluency does not guarantee a correct result.'],['Schema','Query','Execute','Interpret','Explain'],'[R18,R20]'),
 ('What counts as transfer?',['Hold out task compositions or environments.','Measure adaptation data and recovery.','Report positive and negative transfer.'],['Train tasks','Shift','Adapt','Repeat','Measure'],'[R06,R10,R12]'),
 ('A stronger experimental protocol',['Predefine claims and baselines.','Match tool, token, and time budgets.','Audit scoring with humans and independent checks.'],['Specify','Sample','Run','Inspect','Replicate'],'[R05,R09,R12]'),
-('Research profile · cognition',['[R01] organizes ten faculties.','[R04] quantifies unevenness.','The constructs need validation against real decisions.'],None,'[R01,R04]'),
-('Research profile · agents',['[R05] studies evaluation combinations.','[R11] externalizes state for long tasks.','[R18] examines enterprise architecture choices.'],None,'[R05,R11,R18]'),
-('Research profile · learning',['[R07] studies agentic continual pretraining.','[R08] calibrates synthesized tasks.','[R13] tests automated data curation.'],None,'[R07,R08,R13]'),
-('Research profile · safeguards',['[R14] tests source faithfulness.','[R19] argues for process evaluation.','[R20] retains data-query behavior.'],None,'[R14,R19,R20]'),
-('Research agenda',['Validate constructs and verifiers.','Test transfer under controlled shifts.','Publish reproducible traces and cost.','Treat the AGI label as a conclusion requiring evidence.'],None,'[R01–R20]')
+('Research profile · cognition',['[R01] organizes ten faculties.','[R04] quantifies unevenness.','The constructs need validation against real decisions.'],['Faculties','Tasks','Rubrics','Profiles','Validity'],'[R01,R04]'),
+('Research profile · agents',['[R05] studies evaluation combinations.','[R11] externalizes state for long tasks.','[R18] examines enterprise architecture choices.'],['Model','Controller','Memory','Tools','Trace'],'[R05,R11,R18]'),
+('Research profile · learning',['[R07] studies agentic continual pretraining.','[R08] calibrates synthesized tasks.','[R13] tests automated data curation.'],['Task','Trajectory','Feedback','Update','Transfer'],'[R07,R08,R13]'),
+('Research profile · safeguards',['[R14] tests source faithfulness.','[R19] argues for process evaluation.','[R20] retains data-query behavior.'],['Evidence','Action','Policy','Review','Outcome'],'[R14,R19,R20]'),
+('Research agenda',['Validate constructs and verifiers.','Test transfer under controlled shifts.','Publish reproducible traces and cost.','Treat the AGI label as a conclusion requiring evidence.'],['Define','Validate','Transfer','Audit','Replicate'],'[R01–R20]')
 ]
 for item in slide_data: new_slide(*item)
 pptx_path=OUT/'AGI_Research_Review_2026.pptx'; prs.save(pptx_path)
