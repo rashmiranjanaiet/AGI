@@ -1280,7 +1280,7 @@ def page_decor(canvas, doc):
     canvas.line(46, 33, w - 46, 33)
     canvas.setFont("TNR-Italic", 7.2)
     canvas.setFillColor(MUTED)
-    canvas.drawString(46, 21, "Independent literature synthesis · 20-paper corpus · 20 November 2026")
+    canvas.drawString(46, 21, "Independent literature synthesis")
     canvas.setFont("TNR", 7.2)
     canvas.drawRightString(w - 46, 21, f"{doc.page:02d}")
     canvas.restoreState()
