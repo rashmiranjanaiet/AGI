@@ -1380,7 +1380,7 @@ def build_document():
     story.append(Paragraph("A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents", st["affiliation"]))
     story.append(Spacer(1, 3))
     story.append(Paragraph(f"Author:{FIRST_AUTHOR}", st["byline"]))
-    story.append(Paragraph(f"co-author:{SECOND_AUTHOR}", st["affiliation"]))
+    story.append(Paragraph(f"Co-Author:{SECOND_AUTHOR}", st["byline"]))
     story.append(Paragraph("20 November 2026", st["affiliation"]))
     story.append(Spacer(1, 7))
     left = [
