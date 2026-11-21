@@ -1279,10 +1279,9 @@ def page_decor(canvas, doc):
         canvas.setFont("TNR-Bold", 7.2)
         canvas.setFillColor(MUTED)
         canvas.drawString(46, h - 27, "AGI RESEARCH REVIEW · LITERATURE SYNTHESIS")
-    header_author = FIRST_AUTHOR if doc.page % 2 else SECOND_AUTHOR
-    canvas.setFont("TNR", 7.2)
-    canvas.setFillColor(MUTED)
-    canvas.drawRightString(w - 46, h - 27, header_author.upper())
+        header_author = FIRST_AUTHOR if doc.page % 2 else SECOND_AUTHOR
+        canvas.setFont("TNR", 7.2)
+        canvas.drawRightString(w - 46, h - 27, header_author.upper())
     canvas.line(46, 33, w - 46, 33)
     canvas.setFont("TNR-Italic", 7.2)
     canvas.setFillColor(MUTED)
