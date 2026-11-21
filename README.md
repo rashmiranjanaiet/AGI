@@ -1,6 +1,6 @@
 # AGI Research Review (2026)
 
-An independent 50-page literature synthesis by **Rashmi Ranjan Behera**, prepared for academic discussion with **Dr. Vidya Mohanty**. The attribution identifies the intended reader; it does not claim co-authorship, supervision, or endorsement.
+A 50-page literature review by **Rashmi Ranjan Behera** and **Dr. Vidya Mohanty**. Dr. Mohanty served as Academic Research Guide.
 
 The review synthesizes the 20 supplied papers on AGI measurement, multimodal and visual intelligence, agent architectures, training and environment scaling, benchmark design, and process reliability. It includes a paper-by-paper critical review, a proposed evaluation protocol, technical appendices, and linked references.
 

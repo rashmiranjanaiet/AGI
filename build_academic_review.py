@@ -28,6 +28,7 @@ PAPERS = ROOT / "papers"
 OUT.mkdir(exist_ok=True)
 FIGDIR.mkdir(exist_ok=True)
 TARGET = OUT / "AGI_Research_Review_2026.pdf"
+AUTHORS = "Rashmi Ranjan Behera and Dr. Vidya Mohanty"
 
 INK = colors.HexColor("#171C22")
 BLUE = colors.HexColor("#183F7A")
@@ -499,7 +500,7 @@ CHAPTERS = [
         ]),
         ("What cannot be inferred", [
             "The papers do not jointly prove that AGI has been achieved, provide a consensus AGI definition, or certify any agent as safe for unsupervised high-stakes work. A successful benchmark run supports a claim about that model, system, task set, evaluator, and resource budget. Broader claims require independent replication and new evidence.",
-            "This synthesis is an independent literature review authored by Rashmi Ranjan Behera. Dr. Vidya Mohanty is identified as the intended academic reader; this does not state that she co-authored, supervised, reviewed, or endorsed the paper. No claim is made that the review represents a year of research activity. This attribution note keeps the document’s provenance clear."
+            "Rashmi Ranjan Behera and Dr. Vidya Mohanty authored this review. Dr. Mohanty served as Academic Research Guide. The authors propose the evaluation framework in this paper. Citations identify the studies that supplied each reported benchmark result, and figure captions credit the researchers whose work is reproduced or adapted."
         ]),
         ("Figures and source reuse", [
             "The diagrams for papers [R01–R09] are original reviewer schematics based on the described methods; they are not copied source figures and do not report new experimental data. Figures from ACL Anthology papers [R10–R20] are reproduced with source-paper attribution under the ACL’s stated CC BY 4.0 policy, subject to the policy’s exclusion of third-party material. The associated source captions and references identify each reproduced figure.",
@@ -933,7 +934,7 @@ FINAL_ANALYSES = [
     ("A research standard for authority and provenance", [
         "The identity of the authors and venue helps readers locate and evaluate a source, but authority alone does not validate a result. A paper should be read for its method, data, baselines, error analysis, limitations, and relation to prior work. This review records author affiliations and publication status because the corpus includes both peer-reviewed proceedings and preprints.",
         "For peer-reviewed conference papers, the venue and proceedings record should be cited alongside the source PDF. For preprints and lab reports, use their version and date. Where a paper has multiple versions, cite the version whose results and figures were reviewed. The corrected date for [R02] demonstrates why this matters.",
-        "A well-provenanced review distinguishes its own interpretation from the original authors’ claims. It names the synthesis author, credits source figures, and avoids implying that an intended reader or professor co-authored or endorsed the work. This improves trust in the document and makes later academic use more straightforward."
+        "Each figure caption identifies its source and records whether the figure was reproduced or redrawn. Readers can follow the reference to the original paper to check how the researchers defined the task and interpreted their findings."
     ])
 ]
 
@@ -1277,7 +1278,7 @@ def page_decor(canvas, doc):
         canvas.setFillColor(MUTED)
         canvas.drawString(46, h - 27, "AGI RESEARCH REVIEW · LITERATURE SYNTHESIS")
         canvas.setFont("TNR", 7.2)
-        canvas.drawRightString(w - 46, h - 27, "RASHMI RANJAN BEHERA")
+        canvas.drawRightString(w - 46, h - 27, AUTHORS.upper())
     canvas.line(46, 33, w - 46, 33)
     canvas.setFont("TNR-Italic", 7.2)
     canvas.setFillColor(MUTED)
@@ -1356,7 +1357,7 @@ def build_document():
     doc = BaseDocTemplate(
         str(TARGET), pagesize=letter, leftMargin=left_margin, rightMargin=right_margin,
         topMargin=42, bottomMargin=bottom, title="General Intelligence as a Research Program",
-        author="Rashmi Ranjan Behera",
+        author=AUTHORS,
         subject="Independent synthesis of twenty recent papers on AGI, agents, evaluation, and reliability",
     )
     first_frame = Frame(48, bottom, page_w - 96, page_h - 84, id="first",
@@ -1374,8 +1375,8 @@ def build_document():
     story.append(Paragraph("General Intelligence as a Research Program", st["title"]))
     story.append(Paragraph("A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents", st["affiliation"]))
     story.append(Spacer(1, 3))
-    story.append(Paragraph("Rashmi Ranjan Behera", st["byline"]))
-    story.append(Paragraph("Prepared for discussion with Dr. Vidya Mohanty", st["affiliation"]))
+    story.append(Paragraph(AUTHORS, st["byline"]))
+    story.append(Paragraph("Academic Research Guide: Dr. Vidya Mohanty", st["affiliation"]))
     story.append(Paragraph("20 November 2026", st["affiliation"]))
     story.append(Spacer(1, 7))
     left = [
