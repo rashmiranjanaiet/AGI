@@ -1379,8 +1379,8 @@ def build_document():
     story.append(Paragraph("General Intelligence as a Research Program", st["title"]))
     story.append(Paragraph("A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents", st["affiliation"]))
     story.append(Spacer(1, 3))
-    story.append(Paragraph(AUTHORS, st["byline"]))
-    story.append(Paragraph("Academic Research Guide: Dr. Vidya Mohanty", st["affiliation"]))
+    story.append(Paragraph(f"Author:{FIRST_AUTHOR}", st["byline"]))
+    story.append(Paragraph(f"co-author:{SECOND_AUTHOR}", st["affiliation"]))
     story.append(Paragraph("20 November 2026", st["affiliation"]))
     story.append(Spacer(1, 7))
     left = [
