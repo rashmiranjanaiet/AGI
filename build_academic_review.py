@@ -28,7 +28,9 @@ PAPERS = ROOT / "papers"
 OUT.mkdir(exist_ok=True)
 FIGDIR.mkdir(exist_ok=True)
 TARGET = OUT / "AGI_Research_Review_2026.pdf"
-AUTHORS = "Rashmi Ranjan Behera and Dr. Vidya Mohanty"
+FIRST_AUTHOR = "Rashmi Ranjan Behera"
+SECOND_AUTHOR = "Dr. Vidya Mohanty"
+AUTHORS = f"{FIRST_AUTHOR} and {SECOND_AUTHOR}"
 
 INK = colors.HexColor("#171C22")
 BLUE = colors.HexColor("#183F7A")
@@ -1277,8 +1279,10 @@ def page_decor(canvas, doc):
         canvas.setFont("TNR-Bold", 7.2)
         canvas.setFillColor(MUTED)
         canvas.drawString(46, h - 27, "AGI RESEARCH REVIEW · LITERATURE SYNTHESIS")
-        canvas.setFont("TNR", 7.2)
-        canvas.drawRightString(w - 46, h - 27, AUTHORS.upper())
+    header_author = FIRST_AUTHOR if doc.page % 2 else SECOND_AUTHOR
+    canvas.setFont("TNR", 7.2)
+    canvas.setFillColor(MUTED)
+    canvas.drawRightString(w - 46, h - 27, header_author.upper())
     canvas.line(46, 33, w - 46, 33)
     canvas.setFont("TNR-Italic", 7.2)
     canvas.setFillColor(MUTED)
