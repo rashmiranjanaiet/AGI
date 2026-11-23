@@ -177,13 +177,15 @@ def start(c,page,title):
         c.setFont('TNR-Bold',21); c.setFillColor(C(INK)); c.drawString(L,715,title)
         return 694
     c.setFillColor(C(INK))
-    for y,txt,font,size in [(755,title,'TNR-Bold',23),(734,'A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents','TNR',12),(714,'Author:'+FIRST_AUTHOR,'TNR-Bold',11),(674,'Co-Author:'+SECOND_AUTHOR,'TNR-Bold',11),(636,'23 November 2026','TNR',9.5)]:
+    for y,txt,font,size in [(755,title,'TNR-Bold',23),(734,'A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents','TNR',12),(714,'Author:'+FIRST_AUTHOR,'TNR-Bold',11),(683,'Co-Author:'+SECOND_AUTHOR,'TNR-Bold',11),(634,'23 November 2026','TNR',9.5)]:
         c.setFont(font,size);c.drawCentredString(306,y,txt)
-    for yy,addr in [(690,'rashmiranjanabc241947@gmail.com'),(650,'vidya.mohanty@gmail.com')]:
+    for yy,addr in [(701,'rashmiranjanabc241947@gmail.com'),(670,'vidya.mohanty@gmail.com')]:
         c.setFont('TNR',9)
         c.drawCentredString(306,yy,addr)
         c.linkURL('mailto:'+addr,(220,yy-2,392,yy+9),relative=0,thickness=0)
-    return 622
+    c.setFont('TNR',10)
+    c.drawCentredString(306,651,'Department of Computer Science and Engineering, Aryan Institute of Engineering and Technology')
+    return 618
 
 
 def finish(c,page):
