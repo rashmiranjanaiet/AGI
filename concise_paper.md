@@ -1,15 +1,15 @@
 # General Intelligence as a Research Program
 ## Abstract
 How can an evaluator tell whether an agent has learned a transferable procedure or has become fluent in one interface? We examine twenty papers on cognition, agent training, memory and evaluation. We propose testing the same task under a controlled change, then scoring the answer alongside the decisions that produced it. Two cases motivate the design. A computer-use agent must decide which earlier screen still describes its workspace. A data agent must establish which records refer to the same entity before it combines them. Both cases expose errors that a final score can hide.
-## 1   The unit of evaluation
+## 1. Introduction
 A benchmark score belongs to a configured system. The same model can receive different observations, use different tools or retry a failed action a different number of times. Each choice changes the task the system effectively faces [5, 12, 18]. We therefore take the unit of analysis to be a named agent performing a specified task under an explicit budget. This lets a reader ask what would happen if one part changed.
-## Evidence and method
-We use a focused collection of twenty papers selected for the longer review. For each we identify the task, the change under study, the observable result and the scope of the claim. Cognitive frameworks identify abilities to sample [1, 4]. Training studies suggest interventions. Benchmarks supply observable decisions and outcomes. The studies use different task populations and judging rules, so we compare their designs qualitatively. The bibliography gives the official record for each source.
+## Scope and selection
+We examined the twenty full texts assembled for the extended review. We sought coverage of three questions: what counts as generality, how agents acquire or transfer skills, and how their decisions can be evaluated. For each we identify the task, the change under study, the observable result and the scope of the claim. Cognitive frameworks identify abilities to sample [1, 4]. Training studies suggest interventions. Benchmarks supply observable decisions and outcomes. The studies use different task populations and judging rules, so we compare their designs qualitatively. The bibliography gives the official record for each source.
 ## Contribution
 Our proposal couples two comparisons. Across conditions, measure whether a capability survives a change of interface, evidence or task length. Within an episode, check whether the agent can justify a consequential action using evidence available at that moment. Figure 1 illustrates the underlying experimental choice in AgentArch: the same workflow can be run with different orchestration, memory and tool settings. We work through them for memory, data retrieval and process evaluation, then give a scoring example and a prospective experiment. The example illustrates the calculation with hypothetical counts.
 
-# Measuring the breadth of a capability
-## 2   From a faculty to a task
+# 2. Related Work and Literature Review
+## From a faculty to a task
 Burnell and colleagues organize general intelligence around cognitive faculties [1]. To turn a faculty such as learning into an observable test, specify what information becomes available, when the agent receives it and which later decision should change. For instance, introduce a new label for an existing tool and demonstrate it once. Successful use on a fresh task provides evidence about adaptation under that amount of help. A second demonstration changes the interpretation of the result.
 ## When an average hides a weakness
 Characterizing Jaggedness describes how uneven performance can complicate decisions about model use [4]. Averaging across tasks implicitly gives each task a weight. An evaluation dominated by text lookup may reward a system whose visual localization is weak. Visual General Intelligence makes the case for studying perception through prediction and interaction [3]. One practical test asks an agent to locate an object again after the view changes and to explain which observation led it there.
@@ -18,18 +18,18 @@ Figure 2 shows how the training environment itself can change. To evaluate the r
 ## What a profile can support
 Report a success rate for each task family, the number of distinct tasks and the help allowed. Include the weakest family when explaining a proposed use. A score for one agent navigating one interface offers little evidence about a proposed transition from AGI to superintelligence. Genewein and colleagues study that transition through scenarios involving speed, replication and resource constraints [2]. Those scenarios supply assumptions for discussion. Testing a particular agent requires observable predictions at a specified scale.
 
-# Learning across tasks and environments
-## 3   What changes during training?
-Agent-World synthesizes executable environments and tasks, then uses agent performance to guide further training [6]. Environment scaling also enlarges the set of tools and environments an agent can encounter [10]. Repeated use across settings may teach a general procedure. It may also teach a regularity of the generator, such as a familiar order of arguments. A larger training set can increase exposure to either. An evaluation needs a way to distinguish the two explanations.
-## Two ways to change experience
-Continual pre-training exposes a model to agent trajectories before later task training [7]. AgentFrontier instead emphasizes a curriculum near the learner’s current capability, using performance and guidance to select problems [8]. Role-Agent changes both sides of an interaction by evolving the acting and environment roles [17]. If policy and simulator share an erroneous assumption, they may agree on a solution that fails elsewhere. A held-out environment with independently specified outcomes provides a check.
+# 3. Research Methodology
+## Eligibility and sampling
+The sampling frame was the existing twenty-paper collection. We retained a work if its 2026 proceedings publication, report or preprint version fell within the review window of 20 November 2025 to 20 November 2026, its full text could be traced to a publisher, laboratory, author or preprint record, and it addressed at least one review question. Earlier preprints and later proceedings versions of the same work counted as one study. All twenty supplied works met these criteria.
+## Extraction and comparison
+For each source we recorded its publication type, task, intervention, evaluator and limits on inference. We grouped related designs for qualitative comparison. For example, continual pre-training exposes a model to agent trajectories before later task training [7]. AgentFrontier instead emphasizes a curriculum near the learner’s current capability, using performance and guidance to select problems [8]. Role-Agent changes both sides of an interaction by evolving the acting and environment roles [17]. If policy and simulator share an erroneous assumption, they may agree on a solution that fails elsewhere. A held-out environment with independently specified outcomes provides a check.
 ## Composition changes the task
-AgentSynth composes individual computer-use subtasks into longer tasks and reports generating over 6,000 tasks [9]. The reported success rate fell from 18% at difficulty level one to 4% at level six [9]. Figure 3 shows a complementary construction method [10]: tools are grouped into an environment and the task specifies initial and target states. Later steps depend on earlier state. If an early selection is wrong, a locally correct action can carry that error forward. The reported levels vary in difficulty. The difference between them cannot isolate the causal effect of one additional action.
+Agent-World generates environments and uses gaps in performance to guide further training [6]. AgentSynth composes individual computer-use subtasks into longer tasks and reports generating over 6,000 tasks [9]. The reported success rate fell from 18% at difficulty level one to 4% at level six [9]. Figure 3 shows a complementary construction method [10]: tools are grouped into an environment and the task specifies initial and target states. Later steps depend on earlier state. If an early selection is wrong, a locally correct action can carry that error forward. The reported levels vary in difficulty. The difference between them cannot isolate the causal effect of one additional action.
 ## A test of the training claim
 Reserve whole tool families or applications before generating training trajectories. Test three conditions on the same goals: a familiar interface, a renamed interface and a new combination of familiar operations. Match inference budgets and count failed attempts. Compare the trained and baseline agents within each condition. A gain that survives a new composition supports a wider transfer claim than a gain confined to renamed versions of familiar tasks. Report which operations and states were actually held out.
 
-# Memory during sustained computer use
-## 4   Choosing which observation to trust
+# 4. Proposed Evaluation Framework
+## Choosing which observation to trust
 A workflow may pause after an agent selects an account but before it applies a change. On resumption, a saved note identifies the earlier selection while the screen shows the account that is active now. Both observations can be accurate at the time they were made. The question is which one justifies the next action. This distinction matters whenever an agent resumes a task after the workspace may have changed.
 ## How the proposed systems differ
 InfiAgent externalizes state so a workflow can continue with a bounded active context [11]. OS-Symphony combines an orchestrator, milestone-based reflection and visual retrieval [16]. Figure 4 shows the problems that motivate the latter design. Recent frames can repeat evidence, a long history can bury a milestone, and a retrieved tutorial can describe a different interface. Persisting more history addresses only part of this problem. The agent must decide whether a remembered fact still applies.
@@ -38,8 +38,8 @@ Hold the goal, starting state and agent configuration fixed. Run the workflow tw
 ## Attributing a recovery
 Compare three variants under equal context and action budgets: recent frames, saved milestones, and milestones plus a current-state check. An extra tool call can itself improve performance, so allow a matched call in the control. Report stale-state errors among episodes in which stale state was possible. Pooling these with uneventful episodes can make a memory policy appear reliable even when it repeatedly fails at the moment of resumption.
 
-# Following evidence across databases
-## 5   A question that spans two systems
+# 5. Case Studies and Analysis
+## A question that spans two systems
 The Data Agent Benchmark (DAB) includes 104 queries over 17 datasets and four database management systems. Its best evaluated agent attained 57% pass@1 in the reported setup [20]. Figure 5 gives one concrete task: identify English-language books with an average rating of five. The language and ratings reside in different systems. Answering requires the agent to resolve which records describe the same book. The existence of a matching title alone does not resolve an ambiguous identifier.
 ## Where an answer can go wrong
 The trace inspects schemas, selects candidates, computes averages, reconciles keys and writes a result. Correct aggregation can still produce the wrong list if the join drops a book or merges two records. Inspecting only the final file obscures that distinction. For this task, a reviewer could ask for the candidate count before joining, unmatched keys after joining and a link from each output record to the rows used to calculate its average.
@@ -48,8 +48,8 @@ A multimodal retrieval benchmark asks whether a system finds and reads the relev
 ## Beyond a single answer file
 Curation work adds another layer. An agent can execute a filtering policy successfully while choosing a poor policy for downstream model training [13]. Scoring the command, the curated dataset and downstream performance answers three different questions. For DAB, the analogous checks are a successful query, a valid join and an answer that satisfies the user’s condition. Across the two settings, the first successful operation is evidence about execution. The broader claim depends on subsequent checks.
 
-# Scoring outcomes alongside decisions
-## 6   Specify the obligation in advance
+# 6. Evaluation Protocol and Illustrative Results
+## Specify the obligation in advance
 A process rule is useful when a reviewer can tell whether it applied and whether the agent met it. For the database case, one rule might require a check for unmatched identifiers before saving the result. An episode with a single source has no cross-source join, so it offers no opportunity to satisfy that rule. Count eligible episodes explicitly. Use the tool trace available to the evaluator and mark missing evidence as unknown. This avoids rewarding an unverifiable claim that a check occurred.
 ## Outcome and compliance can diverge
 Gritta and colleagues use a checklist to score agent behavior and show that process compliance and task completion can diverge in the same case study [19]. Figure 6 shows why the distinction matters: a planner can choose the right tool while the assistant misreads its response. A correct result obtained by assuming a join key may be fragile. An incorrect result following a valid check may expose missing data or a later calculation error. A reviewer can locate the first unsupported decision by following the observation returned to the assistant and the action it takes next.
@@ -58,14 +58,14 @@ ARM combines specialist behaviors through role-conditioned neuron transplantatio
 ## A scoring decision with consequences
 An agent may correctly determine that two identifiers cannot be reconciled without clarification. A benchmark that requires a completed answer file could score this as a failure. For an operational evaluation, define in advance when clarification is acceptable and report it as a separate outcome. Review disagreements between human scorers on a sample of traces, particularly when a rule uses terms such as ‘sufficient evidence’. A high compliance rate is difficult to interpret if evaluators routinely disagree about the rule.
 
-# A paired evaluation protocol
-## 7   Specify the comparison
+# 6.1 Paired evaluation design
+## Specify the comparison
 We propose pairing each original task with a version that changes one property while preserving its goal. For example, change the format of book identifiers across databases but keep the relevant records and correct answer fixed. Before running either agent, publish the pairing rule, the eligible decisions and the maximum tool budget. Freeze prompts, model versions and environment snapshots. Run both agents on each pair in reset workspaces. Randomize run order and record timeouts, retries and clarification requests.
-## A worked example
-Figure 7 illustrates why a reviewer needs the join evidence. Consider hypothetical counts for twenty eligible join tasks. Each agent returns sixteen correct answers. A reviewer examining the traces finds that A verified identifiers in ten of its correct runs and B did so in fourteen. Define joint success as a correct answer and an observed check. Dividing by all twenty eligible tasks gives 50% for A and 70% for B. The four-task difference identifies which traces to examine. The counts illustrate the score and do not estimate real agent performance.
-## Analysis and uncertainty
-Compute accuracy for each task family and each condition. For each matched task, subtract the baseline correctness indicator from the shifted-condition indicator. Average those paired differences and publish counts of tasks gained and lost. With repeated trials, resample whole task pairs, keeping their repeats together, to express uncertainty. For a small or highly correlated task set, give the underlying counts and limit inference to that set. Separately report the number of traces with insufficient evidence to judge compliance.
-## Conclusion and limits
+## Hypothetical scoring example
+We did not run either agent. Figure 7 uses invented records to illustrate the proposed scoring rule. Consider hypothetical counts for twenty eligible join tasks. Each agent returns sixteen correct answers. Assume that A verified identifiers in ten of its correct runs and B did so in fourteen. Define joint success as a correct answer and an observed check. Dividing by all twenty eligible tasks gives 50% for A and 70% for B. The four-task difference identifies which traces to examine. The counts illustrate the score and do not estimate real agent performance.
+## 7. Discussion and Limitations
+The supplied collection may omit relevant studies and overrepresent particular benchmarks. A prospective replication should compute accuracy for each task family and each condition. For each matched task, subtract the baseline correctness indicator from the shifted-condition indicator. Average those paired differences and publish counts of tasks gained and lost. With repeated trials, resample whole task pairs, keeping their repeats together, to express uncertainty. For a small or highly correlated task set, give the underlying counts and limit inference to that set. Separately report the number of traces with insufficient evidence to judge compliance.
+## 8. Conclusion
 The twenty papers describe different systems, task sets and evaluators. Their scores cannot supply a single estimate of general intelligence. They do support a concrete study design: define what can change, preserve the conditions for comparison, and inspect evidence at the decision most likely to fail. The proposed protocol would be tested most directly by asking independent reviewers to apply its rules to the same held-out traces. Agreement, task-level variance and the cost of collecting traces would determine where the protocol is practical.
 
-# References and evidence map
+# 9. References

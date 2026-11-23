@@ -1,0 +1,162 @@
+[
+  {
+    "author": "Burnell, R., et al.",
+    "title": "Measuring Progress Toward AGI: A Cognitive Framework",
+    "year": 2026,
+    "venue": "Google DeepMind, 16 March",
+    "url": "https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf",
+    "label": "Official report (Google DeepMind)"
+  },
+  {
+    "author": "Genewein, T., et al.",
+    "title": "From AGI to ASI",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "url": "https://arxiv.org/abs/2606.12683",
+    "label": "arxiv.org/abs/2606.12683"
+  },
+  {
+    "author": "Kataoka, H., et al.",
+    "title": "Visual General Intelligence: A White Paper",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "url": "https://arxiv.org/abs/2608.25924",
+    "label": "arxiv.org/abs/2608.25924"
+  },
+  {
+    "author": "Morris, M. R., et al.",
+    "title": "Characterizing Jaggedness Aids Safety & Usability",
+    "year": 2026,
+    "venue": "Google DeepMind, 6 May, v2",
+    "url": "https://cs.stanford.edu/~merrie/papers/jaggedness_preprint.pdf",
+    "label": "Author PDF (Stanford University)"
+  },
+  {
+    "author": "Bandel, E., et al.",
+    "title": "General Agent Evaluation",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "url": "https://arxiv.org/abs/2602.22953",
+    "label": "arxiv.org/abs/2602.22953"
+  },
+  {
+    "author": "Dong, G., et al.",
+    "title": "Agent-World: Scaling Real-World Environment Synthesis for Evolving General Agent Intelligence",
+    "year": 2026,
+    "venue": "arXiv preprint",
+    "url": "https://arxiv.org/abs/2604.18292",
+    "label": "arxiv.org/abs/2604.18292"
+  },
+  {
+    "author": "Su, L., et al.",
+    "title": "Scaling Agents via Continual Pre-training",
+    "year": 2026,
+    "venue": "International Conference on Learning Representations",
+    "url": "https://iclr.cc/virtual/2026/poster/10010741",
+    "label": "iclr.cc/virtual/2026/poster/10010741"
+  },
+  {
+    "author": "Chen, X., et al.",
+    "title": "Expanding the Capability Frontier of LLM Agents with ZPD-Guided Data Synthesis",
+    "year": 2026,
+    "venue": "International Conference on Learning Representations",
+    "url": "https://iclr.cc/virtual/2026/poster/10008542",
+    "label": "iclr.cc/virtual/2026/poster/10008542"
+  },
+  {
+    "author": "Xie, J., Xu, D., Zhao, X., & Song, D.",
+    "title": "AgentSynth: Scalable Task Generation for Generalist Computer-Use Agents",
+    "year": 2026,
+    "venue": "International Conference on Learning Representations",
+    "url": "https://iclr.cc/virtual/2026/poster/10010827",
+    "label": "iclr.cc/virtual/2026/poster/10010827"
+  },
+  {
+    "author": "Fang, R., et al.",
+    "title": "Towards General Agentic Intelligence via Environment Scaling",
+    "year": 2026,
+    "venue": "Findings of ACL, 17610–17621",
+    "url": "https://aclanthology.org/2026.findings-acl.872/",
+    "label": "DOI 10.18653/v1/2026.findings-acl.872"
+  },
+  {
+    "author": "Yu, C., et al.",
+    "title": "InfiAgent: An Infinite-Horizon Framework for General-Purpose Autonomous Agents",
+    "year": 2026,
+    "venue": "Findings of ACL, 35884–35894",
+    "url": "https://aclanthology.org/2026.findings-acl.1787/",
+    "label": "DOI 10.18653/v1/2026.findings-acl.1787"
+  },
+  {
+    "author": "Yehudai, A., et al.",
+    "title": "A Survey on Evaluation of LLM-based Agents",
+    "year": 2026,
+    "venue": "Findings of ACL, 26690–26714",
+    "url": "https://aclanthology.org/2026.findings-acl.1330/",
+    "label": "DOI 10.18653/v1/2026.findings-acl.1330"
+  },
+  {
+    "author": "Kang, F., et al.",
+    "title": "Can Generalist Agents Automate Data Curation?",
+    "year": 2026,
+    "venue": "EMNLP, 18960–18995",
+    "url": "https://aclanthology.org/2026.emnlp-main.815/",
+    "label": "DOI 10.18653/2026.emnlp-main.815"
+  },
+  {
+    "author": "Gao, W., et al.",
+    "title": "Can Your Agent Read the Source Faithfully? Benchmarking MLLM Agents on Source-Grounded Multimodal Retrieval",
+    "year": 2026,
+    "venue": "EMNLP, 42175–42194",
+    "url": "https://aclanthology.org/2026.emnlp-main.1855/",
+    "label": "DOI 10.18653/2026.emnlp-main.1855"
+  },
+  {
+    "author": "Feng, Z., et al.",
+    "title": "ARM: Role-Conditioned Neuron Transplantation for Training-Free Generalist LLM Agent Merging",
+    "year": 2026,
+    "venue": "EMNLP, 48104–48118",
+    "url": "https://aclanthology.org/2026.emnlp-main.2115/",
+    "label": "DOI 10.18653/2026.emnlp-main.2115"
+  },
+  {
+    "author": "Yang, B., et al.",
+    "title": "OS-Symphony: A Holistic Framework for Robust and Generalist Computer-Using Agents",
+    "year": 2026,
+    "venue": "ACL, 22300–22330",
+    "url": "https://aclanthology.org/2026.acl-long.1021/",
+    "label": "DOI 10.18653/v1/2026.acl-long.1021"
+  },
+  {
+    "author": "Wang, X., et al.",
+    "title": "Role-Agent: Bootstrapping LLM Agents via Dual-Role Evolution",
+    "year": 2026,
+    "venue": "Findings of EMNLP, 4360–4379",
+    "url": "https://aclanthology.org/2026.findings-emnlp.208/",
+    "label": "DOI 10.18653/2026.findings-emnlp.208"
+  },
+  {
+    "author": "Bogavelli, T., Subramani, H., & Sharma, R.",
+    "title": "AgentArch: A Benchmark for Evaluating Agent Architectures in Enterprise Workflows",
+    "year": 2026,
+    "venue": "IJCNLP–AACL, 915–933",
+    "url": "https://aclanthology.org/2026.aacl-long.44/",
+    "label": "DOI 10.18653/2026.aacl-long.44"
+  },
+  {
+    "author": "Gritta, M., et al.",
+    "title": "Process Evaluation for Agentic Systems",
+    "year": 2026,
+    "venue": "Findings of EACL, 2678–2692",
+    "url": "https://aclanthology.org/2026.findings-eacl.140/",
+    "label": "DOI 10.18653/v1/2026.findings-eacl.140"
+  },
+  {
+    "author": "Ma, R., et al.",
+    "title": "Can AI Agents Answer Your Data Questions? A Benchmark for Data Agents",
+    "year": 2026,
+    "venue": "EMNLP, 42651–42677",
+    "url": "https://aclanthology.org/2026.emnlp-main.1872/",
+    "label": "DOI 10.18653/2026.emnlp-main.1872"
+  }
+]

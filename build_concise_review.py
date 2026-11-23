@@ -1,6 +1,7 @@
-"""Typeset the eight-page research paper from its manuscript and two attributed figures."""
-from pathlib import Path
+"""Typeset the eight-page research paper from its manuscript, reference records and credited figures."""
+from PIL import Image as PILImage
 import re
+import json
 from xml.sax.saxutils import escape
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_JUSTIFY, TA_LEFT
@@ -38,7 +39,7 @@ def box(c,x,y,w,h,fill):
 def textblock(c,txt,x,y,width,size=10.8,leading=13.4,font='TNR',justify=False,paint=True):
     style=ParagraphStyle('paper',fontName=font,fontSize=size,leading=leading,textColor=C(INK),
                          alignment=TA_JUSTIFY if justify else TA_LEFT)
-    txt=escape(txt)
+    txt=escape(txt).replace('CC BY 4.0','<link href="https://creativecommons.org/licenses/by/4.0/" color="#235481">CC BY 4.0</link>')
     def link(m):
         ids=[int(k) for k in m[1].split(', ')]
         return '['+', '.join(f'<link href="#ref{i}" color="#235481">{i}</link>' for i in ids)+']'
@@ -53,7 +54,10 @@ def textblock(c,txt,x,y,width,size=10.8,leading=13.4,font='TNR',justify=False,pa
 def section(c,part,x,y,size,paint=True):
     heading,body=part
     y=textblock(c,heading,x,y,COL,12.1,14.8,'TNR-Bold',paint=paint)-4
-    return textblock(c,body,x,y,COL,size,size*1.24,justify=True,paint=paint)
+    end=textblock(c,body,x,y,COL,size,size*1.24,justify=True,paint=paint)
+    if heading=='Abstract':
+        end=textblock(c,'Keywords: artificial general intelligence, AI agents, transfer learning, reliability, process evaluation',x,end-4,COL,9,10.2,'TNR-Italic',paint=paint)
+    return end
 
 
 FIGURES = {
@@ -77,6 +81,50 @@ NOTES = {
 
 
 def figure(c,page,top):
+    if page in (3,8):
+        if page==3:
+            rows=[('Tool documents','Names, parameters and signatures','Connect tools that share parameters.'),
+                  ('Tool graph','Domain clusters and a tool set','Select a related group of callable tools.'),
+                  ('Environment','Grounding functions and state','Specify how a call reads or modifies state.'),
+                  ('Task instance','Intent, initial state and target','Evaluate the resulting state after execution.')]
+            title='From a tool schema to an executable evaluation task'
+            credit='Redrawn from Fang et al. [10], Fig. 1 (CC BY 4.0). The rows follow construction order. Labels summarize the operations.'
+            h=32
+        else:
+            rows=[('Web','WebShop, Mind2Web'),('Software engineering','SWE-bench, SWE-bench Verified'),('Scientific','ScienceAgentBench, PeerBench'),('Conversational','τ-bench, τ²-bench')]
+            title='Agent evaluation by application domain'
+            credit='Redrawn from Yehudai et al. [12], Fig. 1 (CC BY 4.0). Selected branches and benchmark names are typeset at reading size.'
+            h=20
+        tag(c,L,top-12,title,12,font='TNR-Bold')
+        if page==3:
+            # Pair the published structure with large, selectable labels for its subpanels.
+            with PILImage.open(ROOT/'figures/source-10.png') as source:
+                detail=source.crop((282,450,737,597))
+                c.drawImage(ImageReader(detail),L,top-175,305,130,preserveAspectRatio=True,anchor='c')
+            x=L+318
+            yy=top-24
+            for idx,(stage,feature,action) in enumerate(rows):
+                tag(c,x,yy-9,stage,11.2,ACC[idx],'TNR-Bold')
+                yy=textblock(c,action,x,yy-13,W-318,10.2,12.3)-10
+            yy=min(yy,top-178)
+            credit='Tool sequence from Fang et al. [10], Fig. 1, CC BY 4.0. The four numbered calls are enlarged from the original. The reading guide summarizes the construction process. Select the figure for the complete diagram.'
+            c.linkURL(SOURCES[9]['url'].rstrip('/')+'.pdf#page=4',(L,top-177,L+305,top-38),relative=0,thickness=0)
+        else:
+            root_x=L+6
+            mid=top-63
+            tag(c,root_x,mid,'Application-specific',10,ACC[0],'TNR-Bold')
+            tag(c,root_x,mid-13,'agent evaluation',10,ACC[0],'TNR-Bold')
+            line(c,L+93,mid-1,L+111,mid-1)
+            line(c,L+111,top-32,L+111,top-98)
+            for idx,(domain,benchmarks) in enumerate(rows):
+                yy=top-32-22*idx
+                line(c,L+111,yy,L+123,yy)
+                box(c,L+123,yy-9,123,18,TINT[idx])
+                tag(c,L+130,yy-4,domain,10.4,ACC[idx],'TNR-Bold')
+                line(c,L+247,yy,L+263,yy)
+                tag(c,L+270,yy-4,benchmarks,10.3,font='TNR')
+            yy=top-110
+        return caption(c,page,credit,L,yy-4,W)
     if page == 7:
         # A concrete counterexample: one ambiguous title, two candidate identifiers.
         height=174
@@ -129,9 +177,13 @@ def start(c,page,title):
         c.setFont('TNR-Bold',21); c.setFillColor(C(INK)); c.drawString(L,715,title)
         return 694
     c.setFillColor(C(INK))
-    for y,txt,font,size in [(739,title,'TNR-Bold',23),(717,'A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents','TNR',12),(694,'Author:'+FIRST_AUTHOR,'TNR-Bold',11),(678,'Co-Author:'+SECOND_AUTHOR,'TNR-Bold',11),(660,'23 November 2026','TNR',9.5)]:
+    for y,txt,font,size in [(755,title,'TNR-Bold',23),(734,'A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents','TNR',12),(714,'Author:'+FIRST_AUTHOR,'TNR-Bold',11),(674,'Co-Author:'+SECOND_AUTHOR,'TNR-Bold',11),(636,'23 November 2026','TNR',9.5)]:
         c.setFont(font,size);c.drawCentredString(306,y,txt)
-    return 641
+    for yy,addr in [(690,'rashmiranjanabc241947@gmail.com'),(650,'vidya.mohanty@gmail.com')]:
+        c.setFont('TNR',9)
+        c.drawCentredString(306,yy,addr)
+        c.linkURL('mailto:'+addr,(220,yy-2,392,yy+9),relative=0,thickness=0)
+    return 622
 
 
 def finish(c,page):
@@ -169,7 +221,7 @@ def body_page(c,page,top,parts):
         bottom=yy-7
     else:
         # Choose the largest common body size that leaves space for the figure and its caption.
-        figspace=174 if page==7 else FIGURES[page][1]
+        figspace={3:195,7:174}.get(page,FIGURES.get(page,(None,174))[1])
         for size in [11.5,11.25,11,10.75,10.5,10.25,10,9.75]:
             upper=min(section(c,p,L,top,size,False) for p in parts[:2])
             lower=min(section(c,p,L,0,size,False) for p in parts[2:])
@@ -187,22 +239,21 @@ def body_page(c,page,top,parts):
 
 def references(c,top):
     y=figure(c,8,top)-9
-    author_override={6:'Renmin University of China and ByteDance Seed',18:'Bogavelli, Subramani and Sharma'}
-    for i,s in enumerate(SOURCES):
+    records=json.loads((ROOT/'concise_references.json').read_text())
+    for i,r in enumerate(records):
         if i in (0,10): yy=y
         x=L if i<10 else COL2
         c.bookmarkHorizontalAbsolute('ref'+str(i+1),yy)
-        title=s['title'] if i!=15 else 'OS-Symphony: A Holistic Framework for Robust and Generalist Computer-Using Agent'
-        author=author_override.get(i+1,s['authors'])
-        venue=(['Google DeepMind','arXiv','arXiv','Position paper','arXiv','arXiv']+['ICLR']*3+['Findings of ACL']*3+['EMNLP']*3+['ACL','Findings of EMNLP','AACL','Findings of EACL','EMNLP'])[i]
-        tag(c,x,yy-10,str(i+1).zfill(2),8.6,ACC[1],'Helvetica-Bold')
-        punctuation='' if title.endswith(('?', '.', '!')) else '.'
-        txt=f'{author} (2026). {title}{punctuation} {venue}.'
-        end=textblock(c,txt,x+20,yy,COL-20,9.6,11.4)
-        c.linkURL(s['url'],(x, end,x+COL,yy),relative=0,thickness=0)
-        yy=end-7
-        if yy<44: raise ValueError('References overflow')
-    tag(c,L,49,'Select a reference to open its official record.',8,MUTED,'TNR-Italic')
+        tag(c,x,yy-9,f'{i+1:02}',8.5,ACC[1],'Helvetica-Bold')
+        title=r['title'].rstrip('.')
+        mark='' if title.endswith('?') else '.'
+        entry=f"{r['author']} ({r['year']}). {title}{mark} {r['venue']}."
+        end=textblock(c,entry,x+17,yy,COL-17,9,10.25)
+        end=textblock(c,r['label'],x+17,end-1,COL-17,8.4,9.4,'TNR-Italic')
+        c.linkURL(r['url'],(x,end,x+COL,yy),relative=0,thickness=0)
+        yy=end-4
+        if end<43: raise ValueError(f'Reference {i+1} ends at {end}')
+
 
 
 def build_document():
