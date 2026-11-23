@@ -145,7 +145,7 @@ def figure(c,page,top):
             x=L+j*265
             tag(c,x,top-119,name,10,ACC[3-j],'Helvetica-Bold')
             textblock(c,detail,x,top-126,COL,10,12)
-        return caption(c,7,'Illustrative records created for this paper. A correct title conceals a choice between two editions. The score below counts whether the trace establishes the mapping.',L,y+8,W)
+        return caption(c,7,'Illustrative records created for this paper. A correct title conceals a choice between two editions. The scoring example above counts whether the trace establishes the mapping.',L,y+8,W)
     source,height,credit=FIGURES[page]
     bottom=top-height
     w=COL if page in NOTES else W
@@ -177,15 +177,21 @@ def start(c,page,title):
         c.setFont('TNR-Bold',21); c.setFillColor(C(INK)); c.drawString(L,715,title)
         return 694
     c.setFillColor(C(INK))
-    for y,txt,font,size in [(755,title,'TNR-Bold',23),(734,'A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents','TNR',12),(714,'Author:'+FIRST_AUTHOR,'TNR-Bold',11),(683,'Co-Author:'+SECOND_AUTHOR,'TNR-Bold',11),(634,'23 November 2026','TNR',9.5)]:
+    for y,txt,font,size in [(755,title,'TNR-Bold',23),(734,'A Framework for Evaluating Capability, Transfer, and Reliability in AI Agents','TNR',12),(668,'23 November 2026','TNR',9.5)]:
         c.setFont(font,size);c.drawCentredString(306,y,txt)
-    for yy,addr in [(701,'rashmiranjanabc241947@gmail.com'),(670,'vidya.mohanty@gmail.com')]:
+    for x,label,addr in [
+        (L+COL/2,'Author: '+FIRST_AUTHOR,'rashmiranjanabc241947@gmail.com'),
+        (COL2+COL/2,'Co-Author: '+SECOND_AUTHOR,'vidya.mohanty@gmail.com')
+    ]:
+        c.setFont('TNR-Bold',11)
+        c.drawCentredString(x,715,label)
         c.setFont('TNR',9)
-        c.drawCentredString(306,yy,addr)
-        c.linkURL('mailto:'+addr,(220,yy-2,392,yy+9),relative=0,thickness=0)
+        c.drawCentredString(x,702,addr)
+        half=c.stringWidth(addr,'TNR',9)/2
+        c.linkURL('mailto:'+addr,(x-half,700,x+half,711),relative=0,thickness=0)
     c.setFont('TNR',10)
-    c.drawCentredString(306,651,'Department of Computer Science and Engineering, Aryan Institute of Engineering and Technology')
-    return 618
+    c.drawCentredString(306,684,'Department of Computer Science and Engineering, Aryan Institute of Engineering and Technology')
+    return 650
 
 
 def finish(c,page):
@@ -240,7 +246,7 @@ def body_page(c,page,top,parts):
 
 
 def references(c,top):
-    y=figure(c,8,top)-9
+    y=top
     records=json.loads((ROOT/'concise_references.json').read_text())
     for i,r in enumerate(records):
         if i in (0,10): yy=y
@@ -250,10 +256,10 @@ def references(c,top):
         title=r['title'].rstrip('.')
         mark='' if title.endswith('?') else '.'
         entry=f"{r['author']} ({r['year']}). {title}{mark} {r['venue']}."
-        end=textblock(c,entry,x+17,yy,COL-17,9,10.25)
+        end=textblock(c,entry,x+17,yy,COL-17,10,12)
         end=textblock(c,r['label'],x+17,end-1,COL-17,8.4,9.4,'TNR-Italic')
         c.linkURL(r['url'],(x,end,x+COL,yy),relative=0,thickness=0)
-        yy=end-4
+        yy=end-7
         if end<43: raise ValueError(f'Reference {i+1} ends at {end}')
 
 
