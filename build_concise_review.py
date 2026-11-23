@@ -56,92 +56,62 @@ def section(c,part,x,y,size,paint=True):
     return textblock(c,body,x,y,COL,size,size*1.24,justify=True,paint=paint)
 
 
+FIGURES = {
+    1: (18, 172, "AgentArch links two enterprise workflows to architecture settings and scoring decisions. Bogavelli et al. [18], Fig. 1."),
+    2: (17, 214, "Role-Agent compares static, synthetic and jointly evolving environments. Wang et al. [17], Fig. 1."),
+    3: (10, 240, "Building a tool environment and an executable task. Fang et al. [10], Fig. 1."),
+    5: (20, 239, "DAB setup and a trace linking book and review records across databases. Ma et al. [20], Fig. 1."),
+    6: (19, 225, "Planner, assistant and tool calls in an example agent workflow. Gritta et al. [19], Fig. 1. The annotation at right applies our audit to the database case."),
+    8: (12, 145, "Application-specific benchmarks in the survey taxonomy. Yehudai et al. [12], Fig. 1, excerpt."),
+}
+NOTES = {
+    2: ("Reading the three settings", [
+        ("Static", "The agent explores a fixed environment. Sparse feedback can leave a mistaken procedure uncorrected."),
+        ("Synthetic", "Generating a new setting widens exposure. A shared generator can still repeat the same assumptions."),
+        ("Joint evolution", "The agent and environment change together. Reserve an independent task to test whether a learned procedure transfers.")]),
+    6: ("Worked trace annotation", [
+        ("Plan", "Retrieve titles and ratings. Record the identifier used by each source before combining records."),
+        ("Tool observation", "If two rows share a title but refer to different editions, a title match alone cannot establish identity."),
+        ("Review decision", "Mark the check as satisfied only when the trace resolves the ambiguity or requests clarification.")]),
+}
+
+
 def figure(c,page,top):
-    """Draw in a local coordinate system; return the bottom of the caption."""
-    height={1:105,2:140,3:120,5:239,6:150,7:135,8:93}[page]
-    y=top-height
-    c.saveState()
-    c.translate(L,y)
-    if page==1:
-        tag(c,0,91,'A matched evaluation of one agent',11,font='TNR-Bold')
-        blocks=[('Conditions','Task pair','same goal, one change'),('Execution','Agent trace','actions and evidence'),('Outcome','Task score','correct or incomplete'),('Process','Decision audit','justified or unsupported')]
-        for i,(a,b,d) in enumerate(blocks):
-            x=i*131
-            box(c,x,10,124,66,TINT[i])
-            tag(c,x+8,58,a.upper(),7.4,ACC[i],'Helvetica-Bold')
-            tag(c,x+8,39,b,13,INK,'TNR-Bold')
-            tag(c,x+8,21,d,8,INK)
-            if i<3: line(c,x+124,42,x+131,42,ACC[i])
-    elif page==2:
-        tag(c,0,126,'One goal, three shifts',11,font='TNR-Bold')
-        box(c,0,40,126,52,TINT[0])
-        tag(c,9,71,'Reference task',12,INK,'TNR-Bold')
-        tag(c,9,54,'Locate a named record',8.7)
-        for i,(a,b) in enumerate([('Interface','Move or rename the search control'),('Evidence','Replace a text label with a visual cue'),('Composition','Require a second lookup before selection')]):
-            yy=87-39*i
-            line(c,126,66,157,66)
-            line(c,157,66,157,yy+14)
-            line(c,157,yy+14,176,yy+14)
-            box(c,176,yy,338,29,TINT[i+1])
-            tag(c,185,yy+10,a,10,ACC[i+1],'Helvetica-Bold')
-            tag(c,274,yy+10,b,9)
-    elif page==3:
-        tag(c,0,103,'AgentSynth success at two reported difficulty levels',11,font='TNR-Bold')
-        for i,(label,val) in enumerate([('Level 1',18),('Level 6',4)]):
-            yy=68-31*i
-            tag(c,0,yy+3,label,10)
-            c.setFillColor(C(TINT[i])); c.rect(86,yy,350,17,0,1)
-            c.setFillColor(C(ACC[i])); c.rect(86,yy,350*val/20,17,0,1)
-            tag(c,450,yy+1,f'{val}%',13,ACC[i],'Helvetica-Bold')
-        for v in [0,5,10,15,20]:
-            xx=86+v*17.5
-            line(c,xx,28,xx,24)
-            tag(c,xx-3,11,f'{v}%',8,MUTED)
-    elif page==5:
-        p=ROOT/'figures/source-20.png'
-        c.drawImage(ImageReader(p),0,0,width=W,height=height,preserveAspectRatio=True,anchor='c',mask='auto')
-    elif page==6:
-        tag(c,0,137,'Audit of a cross-source join',11,font='TNR-Bold')
-        tag(c,128,113,'Check observed',10,ACC[0],'Helvetica-Bold')
-        tag(c,332,113,'Check missing',10,ACC[3],'Helvetica-Bold')
-        for i,(row,words) in enumerate([('Correct answer',['Supported match','Accidental match possible']),('Incorrect answer',['Inspect later operations','Inspect join and calculation'])]):
-            yy=66-48*i
-            tag(c,0,yy+14,row,10,INK,'TNR-Bold')
-            for j,word in enumerate(words):
-                xx=119+200*j
-                box(c,xx,yy,194,39,TINT[i*2+j]); tag(c,xx+9,yy+15,word,10)
-    elif page==7:
-        tag(c,0,120,'Twenty eligible tasks per agent',11,font='TNR-Bold')
-        for i,nums in enumerate([(10,6,4),(14,2,4)]):
-            yy=82-31*i
-            tag(c,0,yy+3,'Agent '+('A' if i==0 else 'B'),10,INK,'TNR-Bold')
-            xx=71
-            for k,v in enumerate(nums):
-                ww=21.5*v
-                c.setFillColor(C(ACC[[0,2,3][k]])); c.rect(xx,yy,ww,21,0,1)
-                tag(c,xx+ww/2-4,yy+6,str(v),10,'#FFFFFF','Helvetica-Bold')
-                xx+=ww
-        for x,idx,label in [(0,0,'Correct + verified'),(175,2,'Correct + unverified'),(362,3,'Incorrect')]:
-            box(c,x,18,10,10,ACC[idx]); tag(c,x+16,19,label,9)
-    elif page==8:
-        tag(c,0,77,'Publication records in the review',11,font='TNR-Bold')
-        xx=0
-        for i,(v,label) in enumerate([(6,'Lab reports and preprints'),(3,'ICLR'),(11,'ACL-family proceedings')]):
-            ww=W*v/20
-            c.setFillColor(C(ACC[i])); c.rect(xx,35,ww-2,28,0,1)
-            tag(c,xx+7,44,str(v),12,'#FFFFFF','Helvetica-Bold')
-            tag(c,xx,19,label,8.3)
-            xx+=ww
-    c.restoreState()
-    caps={
-      1:'Authors’ framework. A change in conditions is interpreted alongside two observations from the same run: what the agent accomplished and which evidence supported its decision. Based on [5, 12, 19].',
-      2:'Proposed paired variants of a lookup task. Each branch starts from the same reference task. The comparison tests a different aspect of transfer in each branch [1, 3, 4].',
-      3:'Authors’ chart of the two endpoint values reported by Xie et al. [9]. The horizontal scale runs from 0% to 20%. The underlying study reports results for its own generated tasks and evaluated agents.',
-      5:'DAB setup and example agent trace. Ma et al. [20], Fig. 1, p. 42652. Reproduced from the paper, cropped to the figure panels. © 2026 ACL, CC BY 4.0.',
-      6:'Authors’ outcome and process grid, informed by [19, 20]. Cell descriptions give candidate explanations for a single episode. The example assumes the trace is complete and the check applies.',
-      7:'Authors’ illustrative counts. The teal segment counts tasks meeting both criteria. The amber segment counts correct answers without an observed check. These are hypothetical runs.',
-      8:'Authors’ count of the reviewed records [1–20], grouped by the version cited. A proceedings paper is counted once even if an earlier preprint exists.'}
-    return caption(c,page,caps[page],L,y-3,W)
+    if page == 7:
+        # A concrete counterexample: one ambiguous title, two candidate identifiers.
+        height=174
+        y=top-height
+        tag(c,L,top-11,'Worked example: tracing the identity of a book',12,font='TNR-Bold')
+        for j,(name,rows) in enumerate([
+            ('Catalogue', ['ID      TITLE           EDITION','51      Ember           2018','72      Ember           2022']),
+            ('Review record', ['REF     TITLE           RATING','E72     Ember           5.0'])]):
+            x=L+j*265
+            box(c,x,top-90,250,67,TINT[j])
+            tag(c,x+9,top-39,name,10,ACC[j],'Helvetica-Bold')
+            for k,row in enumerate(rows): tag(c,x+9,top-54-12*k,row,8.2,INK,'Courier')
+        line(c,L+124,top-90,L+124,top-101)
+        line(c,L+390,top-90,L+390,top-101)
+        for j,(name,detail) in enumerate([
+            ('Title match','Both catalogue rows match. The edition is ambiguous.'),
+            ('Verified key mapping','If the source documents E72 → 72, select the 2022 edition.')]):
+            x=L+j*265
+            tag(c,x,top-119,name,10,ACC[3-j],'Helvetica-Bold')
+            textblock(c,detail,x,top-126,COL,10,12)
+        return caption(c,7,'Illustrative records created for this paper. A correct title conceals a choice between two editions. The score below counts whether the trace establishes the mapping.',L,y+8,W)
+    source,height,credit=FIGURES[page]
+    bottom=top-height
+    w=COL if page in NOTES else W
+    im=ImageReader(ROOT/f'figures/source-{source}.png')
+    c.drawImage(im,L,bottom,width=w,height=height,preserveAspectRatio=True,anchor='c',mask='auto')
+    if page in NOTES:
+        title,notes=NOTES[page]
+        yy=top-12
+        tag(c,COL2,yy,title,12,font='TNR-Bold')
+        yy-=18
+        for name,note in notes:
+            tag(c,COL2,yy,name,10,ACC[0],'Helvetica-Bold')
+            yy=textblock(c,note,COL2,yy-5,COL,10.5,12.6)-15
+    return caption(c,page,credit+' Source artwork cropped from the paper, © 2026 ACL, CC BY 4.0.',L,bottom-3,W)
 
 
 def caption(c,i,txt,x,top,width):
@@ -199,14 +169,14 @@ def body_page(c,page,top,parts):
         bottom=yy-7
     else:
         # Choose the largest common body size that leaves space for the figure and its caption.
-        figspace={1:105,2:140,3:120,5:239,6:150,7:135}[page]
+        figspace=174 if page==7 else FIGURES[page][1]
         for size in [11.5,11.25,11,10.75,10.5,10.25,10,9.75]:
             upper=min(section(c,p,L,top,size,False) for p in parts[:2])
             lower=min(section(c,p,L,0,size,False) for p in parts[2:])
             room=upper-figspace-36+lower-53
             if room>=24:
                 break
-        gap=max(9,min(room/2,32))
+        gap=max(6,min(room/2,10))
         section(c,parts[0],L,top,size); section(c,parts[1],COL2,top,size)
         col_top=figure(c,page,upper-gap)-gap
         bottom=min(section(c,parts[2],L,col_top,size),section(c,parts[3],COL2,col_top,size))
@@ -216,7 +186,7 @@ def body_page(c,page,top,parts):
 
 
 def references(c,top):
-    y=figure(c,8,top)-14
+    y=figure(c,8,top)-9
     author_override={6:'Renmin University of China and ByteDance Seed',18:'Bogavelli, Subramani and Sharma'}
     for i,s in enumerate(SOURCES):
         if i in (0,10): yy=y
@@ -228,7 +198,7 @@ def references(c,top):
         tag(c,x,yy-10,str(i+1).zfill(2),8.6,ACC[1],'Helvetica-Bold')
         punctuation='' if title.endswith(('?', '.', '!')) else '.'
         txt=f'{author} (2026). {title}{punctuation} {venue}.'
-        end=textblock(c,txt,x+20,yy,COL-20,10,12)
+        end=textblock(c,txt,x+20,yy,COL-20,9.6,11.4)
         c.linkURL(s['url'],(x, end,x+COL,yy),relative=0,thickness=0)
         yy=end-7
         if yy<44: raise ValueError('References overflow')
